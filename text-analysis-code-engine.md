@@ -69,7 +69,7 @@ This tutorial requires:
    * **Optional** {{site.data.keyword.registryshort_notm}} plugin (`container-registry`)
 
 You can find instructions to download and install these tools for your operating environment in the [Getting started with tutorials](/docs/solution-tutorials?topic=solution-tutorials-tutorials) guide.
-To avoid the installation of these tools, this tutorial will use the [{{site.data.keyword.cloud-shell_short}}](https://{DomainName}/shell) from the {{site.data.keyword.cloud_notm}} console.
+To avoid the installation of these tools, this tutorial will use the [{{site.data.keyword.cloud-shell_short}}](https://{DomainName}/shell) from the {{site.data.keyword.cloud_notm}} console. You can also perform many of these tasks from the [{{site.data.keyword.codeengineshort}} console](https://{DomainName}/codeengine/overview){: external}.
 
 ## Start a new {{site.data.keyword.cloud-shell_notm}}
 {: #text-analysis-cloud-shell}
@@ -77,7 +77,7 @@ To avoid the installation of these tools, this tutorial will use the [{{site.dat
 
 1. From the {{site.data.keyword.cloud_notm}} console in your browser click the button in the upper right corner to create a new [{{site.data.keyword.cloud-shell_short}}](https://{DomainName}/shell).
 
-
+The {{site.data.keyword.cloud-shell_notm}} is available only in specific regions. For more information, see [{{site.data.keyword.cloud-shell_short}}](/docs/cloud-shell?topic=cloud-shell-shell-ui#change-location) documentation.
 
 ## Create an {{site.data.keyword.codeenginefull_notm}} project
 {: #text-analysis-code-engine-create_code_engine_project}
@@ -85,11 +85,11 @@ To avoid the installation of these tools, this tutorial will use the [{{site.dat
 
 In this section, you will create a {{site.data.keyword.codeengineshort}} project. A project is a grouping of {{site.data.keyword.codeengineshort}} entities such as applications, jobs, and builds. Projects are used to manage resources and provide access to its entities.
 
-Putting entities into a single project enables you to manage access control more easily. The entities within a project share the same private network, which enables them to talk to each other securely. To understand what a project is, check the [documentation](https://{DomainName}/docs/codeengine?topic=codeengine-manage-project)
+Putting entities into a single project enables you to manage access control more easily. The entities within a project share the same private network, which enables them to talk to each other securely. To understand what a project is, check the [documentation](https://{DomainName}/docs/codeengine?topic=codeengine-manage-project). 
 
 1. Navigate to [{{site.data.keyword.codeenginefull_notm}} Overview](https://{DomainName}/codeengine/overview) page.
 2. On the left pane, click on **Projects** and then click **Create**.
-   - Select a location.
+   - Select a location. You must use the same region location for both your project and your {{site.data.keyword.cloud-shell_short}} instance. For more information, see [{{site.data.keyword.cloud-shell_short}}](/docs/cloud-shell?topic=cloud-shell-shell-ui#change-location) documentation. 
    - Provide a project name.
    - Select the resource group where you will create your project and also the cloud services required in the later steps. Resource groups are a way for you to organize your account resources into customizable groupings.
    - Click on **Create**.
@@ -121,7 +121,7 @@ Putting entities into a single project enables you to manage access control more
 
 {{site.data.keyword.codeengineshort}} Applications run your code to serve HTTP requests, automatically scale up and back down to zero, and offer traffic routing to multiple revisions. In this section, you will deploy your frontend and backend applications to the {{site.data.keyword.codeengineshort}} project. The **frontend** web application will allow users to upload text files, while the **backend** application will write the file to {{site.data.keyword.cos_full_notm}}.
 
-We've already built images for the two applications and pushed them to the public {{site.data.keyword.registryshort_notm}}. You will use these pre-built container images to deploy the respective applications. Creation of your own applications will be covered in a later step.
+We've already built images for the two applications and pushed them to the public {{site.data.keyword.registryshort_notm}}. You will use these pre-built container images to deploy the respective applications. Creation of your own applications will be covered in a later step. Complete this task with the CLI. You can also complete this task from the [{{site.data.keyword.codeengineshort}} console](https://{DomainName}/codeengine/overview){: external}.
 
 ### Deploy a frontend application
 {: #text-analysis-code-engine-4}
@@ -163,7 +163,7 @@ Congratulations!! You've just deployed a web application to {{site.data.keyword.
 
 When you created the application with the `application create` command, you only passed in an image to use and a name for your application. While this is the minimum amount of information to deploy an application, there are a number of other knobs you have control over. Among others, you can set the number of requests that can be processed concurrently per instance, the amount of CPU for the instance of the application, the amount of memory set for the instance of the application, the environment variables for the application, the maximum and minimum number of instances that can be used for this application, and the port where the application listens for requests.
 
-Most of these values have a default set if nothing is provided as an option when creating the application. Because we did not provide a value, {{site.data.keyword.codeengineshort}} deployed our application with a default max scale of 10, meaning that it will only scale our application up to 10 instances. The default minimum scale is zero, so that when our application is no longer in use, it will scale itself back down to zero.
+Most of these values have a default set if nothing is provided as an option when creating the application. Because we did not provide a value, {{site.data.keyword.codeengineshort}} deployed our application with a default max scale of 10, meaning that it will only scale our application up to 10 instances. The default minimum scale is zero, so that when our application is no longer in use, it will scale itself back down to zero. You can also find this information from the [{{site.data.keyword.codeengineshort}} console](https://{DomainName}/codeengine/overview){: external}.
 
 1. To check the autoscaling capabilities of {{site.data.keyword.codeengineshort}}, we can use a load generator to generate a load against our service. This load generator will simulate about 300 clients hitting the URL for 30 seconds. Navigate to the [load generator URL](https://load.fun.cloud.ibm.com/) and paste the frontend application URL from the step above.
 2. Click on **Generate load** to generate traffic.
@@ -254,7 +254,7 @@ With {{site.data.keyword.nlufull}}, developers can analyze semantic features of 
 3. Click **Buckets** then **Customize your bucket**
 
    _When you create buckets or add objects, be sure to avoid the use of Personally Identifiable Information (PII).Note: PII is information that can identify any user (natural person) by name, location, or any other means._
-   1. Enter **Unique bucket name**:  `<yourInitials>-bucket-code-engine`.
+   1. Enter **Unique bucket name**:  `<yourInitials+date>-bucket-code-engine`.
    3. Select a **Location**, where you created the {{site.data.keyword.codeengineshort}} project.
    2. Select **Smart Tier** Storage class.
    3. Click **Create bucket**.
@@ -273,10 +273,11 @@ With {{site.data.keyword.nlufull}}, developers can analyze semantic features of 
       {: pre}
 
 5. Create an instance of [{{site.data.keyword.nlushort}}](https://{DomainName}/catalog/services/natural-language-understanding)
-   1. Select a region and select **Lite** plan.
+   1. Select a location and select **Lite** plan.
    2. Set **Service name** to **code-engine-nlu** and select the resource group where you created the {{site.data.keyword.codeengineshort}} project.
-   3. Click on **Create**.
-   4. Capture the service name in a shell variable:
+   3. Read the license agreement and then check **I have read and agree to the following license agreements:**.
+   4. Click on **Create**.
+   5. Capture the service name in a shell variable:
       ```sh
       NLU_INSTANCE_NAME=YourServiceName
       ```
@@ -286,7 +287,7 @@ With {{site.data.keyword.nlufull}}, developers can analyze semantic features of 
 ### Bind the {{site.data.keyword.cos_short}} service to the backend application
 {: #text-analysis-code-engine-9}
 
-Now, you will need to pass in the credentials for the {{site.data.keyword.cos_full_notm}} instance you just created into your backend application. You will do this by binding the {{site.data.keyword.cos_short}} service to your application, which automatically adds credentials for a service to the environment variables for your application or job.
+Now, you will need to pass in the credentials for the {{site.data.keyword.cos_full_notm}} instance you just created into your backend application. You will do this by binding the {{site.data.keyword.cos_short}} service to your application, which automatically adds credentials for a service to the environment variables for your application or job. Complete this task with the CLI. You can also complete this task from the [{{site.data.keyword.codeengineshort}} console](https://{DomainName}/codeengine/overview){: external}.
 
 1. Create a binding for {{site.data.keyword.cos_short}} service with a prefix `COS` for ease of use in your application. The **bind** command creates a service credential in the service instance and from that initiaizes the environment variables of the application with the credentials. _Each service binding can be configured to use a custom environment variable prefix by using the `--prefix` flag._
    ```sh
@@ -334,7 +335,7 @@ Now, you have the backend application connected to the frontend application. You
 ### Create a job
 {: #text-analysis-code-engine-11}
 
-Jobs, unlike applications which react to incoming HTTP requests, are meant to be used for running container images that contain an executable designed to run one time and then exit. When you create a `job`, you can specify workload configuration information that is used each time the job is run. You can create a job from the console or with the CLI.
+Jobs, unlike applications which react to incoming HTTP requests, are meant to be used for running container images that contain an executable designed to run one time and then exit. When you create a `job`, you can specify workload configuration information that is used each time the job is run. Complete this task with the CLI. You can also complete this task from the [{{site.data.keyword.codeengineshort}} console](https://{DomainName}/codeengine/overview){: external}.
 
 This job will read text files from {{site.data.keyword.cos_full_notm}}, and then analyze them using the {{site.data.keyword.nlushort}} Service. It will need to have access to service credentials for both services.
 
@@ -402,7 +403,7 @@ This job will read text files from {{site.data.keyword.cos_full_notm}}, and then
 ### Automate the job run
 {: #text-analysis-code-engine-automate}
 
-Instead of running the job manually, you can automate the job run by creating an {{site.data.keyword.cos_full_notm}} subscription that listens for changes to an {{site.data.keyword.cos_short}} bucket. When you create a subscription to a bucket, your job receives a separate event for each successful change to that bucket. 
+Instead of running the job manually, you can automate the job run by creating an {{site.data.keyword.cos_full_notm}} subscription that listens for changes to an {{site.data.keyword.cos_short}} bucket. When you create a subscription to a bucket, your job receives a separate event for each successful change to that bucket. Complete this task with the CLI. You can also complete this task from the [{{site.data.keyword.codeengineshort}} console](https://{DomainName}/codeengine/overview){: external}.
 
 1. Before you can create an {{site.data.keyword.cos_short}} subscription, you must assign the `Notifications Manager` role to {{site.data.keyword.codeengineshort}}. As a Notifications Manager, {{site.data.keyword.codeengineshort}} can view, modify, and delete notifications for an {{site.data.keyword.cos_short}} bucket. [Follow the instructions here](https://{DomainName}/docs/codeengine?topic=codeengine-eventing-cosevent-producer#notify-mgr-cos) to assign the Notifications Manager role to your {{site.data.keyword.codeengineshort}} project.
 2. Run the below command to connect your `backend-job` to the {{site.data.keyword.cos_full_notm}} event producer. _Check and update the `bucket name` before running the command_
