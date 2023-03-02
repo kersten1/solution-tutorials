@@ -89,7 +89,7 @@ Putting entities into a single project enables you to manage access control more
 
 1. Navigate to [{{site.data.keyword.codeenginefull_notm}} Overview](https://{DomainName}/codeengine/overview) page.
 2. On the left pane, click on **Projects** and then click **Create**.
-   - Select a location. You must use the same region location for both your project and your {{site.data.keyword.cloud-shell_short}} instance. For more information, see [{{site.data.keyword.cloud-shell_short}}](/docs/cloud-shell?topic=cloud-shell-shell-ui#change-location) documentation. 
+   - Select a location. 
    - Provide a project name.
    - Select the resource group where you will create your project and also the cloud services required in the later steps. Resource groups are a way for you to organize your account resources into customizable groupings.
    - Click on **Create**.
